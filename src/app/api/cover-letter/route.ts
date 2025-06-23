@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 
 const apiKey = process.env.GEMINI_API_KEY;
 
-const ai = new GoogleGenAI({apiKey});
+const ai = new GoogleGenAI({ apiKey });
 
 export async function POST(request: Request) {
   const { cvText, jobData, language } = await request.json();
@@ -13,57 +13,58 @@ export async function POST(request: Request) {
       {
         role: "user",
         parts: [{
-          text: 
-          ` Buatkan **output dalam format JSON** dengan struktur sebagai berikut:
-            {
-              "coverLetter": "", 
-              "compatibility": {
-                "percentage": "", 
-                "strong_match": "", 
-                "experience_level": "", 
-                "minor_gap": ""
-              }
-            }
+          text:
+`Generate an **output in valid JSON format** with the following structure:
 
-            ⚠️ Ketentuan:
-            - "coverLetter": Surat lamaran kerja dalam bahasa ${language}, formal tapi tidak kaku, berdasarkan informasi CV dan lowongan di bawah.
-            - "percentage": Angka kecocokan keseluruhan antara CV dan lowongan (dalam persentase, tanpa simbol %).
-            - "strong_match": Paragraf pendek yang menjelaskan dengan bahasa ${language} formal dan tidak terlalu kaku dan menggunakan kata "kamu" aspek-aspek yang paling cocok antara kamu dan posisi yang dilamar.
-            - "experience_level": Paragraf pendek dengan bahasa ${language} formal dan tidak terlalu kaku yang menjelaskan seberapa cocok pengalaman kamu dengan persyaratan lowongan.
-            - "minor_gap": Paragraf pendek dengan bahasa ${language} formal dan tidak terlalu kaku yang menyebutkan kekurangan kecil atau hal yang perlu kamu tingkatkan agar lebih sesuai dengan lowongan.
+{
+  "coverLetter": "", 
+  "compatibility": {
+    "percentage": "", 
+    "strong_match": "", 
+    "experience_level": "", 
+    "minor_gap": ""
+  }
+}
 
-            📌 Format **cover letter** wajib mengikuti struktur ini:
+⚠️ Rules:
+- "coverLetter": A job application letter written in ${language}, formal but conversational, based on the CV and job listing provided below.
+- "percentage": Overall compatibility score between the CV and the job listing (as a number, no % symbol).
+- "strong_match": A short paragraph in ${language}, using a formal yet friendly tone and the word "you", explaining the strongest matches between you and the role.
+- "experience_level": A short paragraph in ${language}, formal yet friendly, explaining how well your experience aligns with the job requirements.
+- "minor_gap": A short paragraph in ${language}, formal yet friendly, mentioning minor gaps or areas you can improve to better fit the position.
 
-            <p><strong>[Nama Lengkap]</strong><br>
-            📞 [Nomor Telepon]<br>
-            📧 [Email Aktif]</p>
+📌 The **cover letter** must follow this structure:
 
-            <p>[lokasi , tanggal/bulan/tahun]</p>
+<p><strong>[Full Name]</strong><br>
+📞 [Phone Number]<br>
+📧 [Active Email]</p>
 
-            <p><strong>Kepada: HR Devisi [Nama Perusahaan]</strong></p>
+<p>[Location, date/month/year]</p>
 
-            <p>Dengan hormat, <br>
-            Paragraf 1: Perkenalan singkat, posisi yang dilamar, dan alasan tertarik.</p>
+<p><strong>To: HR Department of [Company Name]</strong></p>
 
-            <p>Paragraf 2: Penjabaran skill dan pengalaman relevan (magang, proyek, atau bootcamp).</p>
+<p>Dear Hiring Manager, <br>
+Paragraph 1: A short introduction, mention the role you’re applying for, and why you're interested.</p>
 
-            <p>Paragraf 3: Penutup, harapan ke tahap wawancara, dan ucapan terima kasih.</p>
+<p>Paragraph 2: Describe relevant skills and experiences (internships, projects, bootcamps, etc.).</p>
 
-            <p>Hormat saya,<br>
-            <strong>[Nama Lengkap]</strong></p>
+<p>Paragraph 3: Closing paragraph with expectations for interview opportunity and thank you.</p>
 
-            📎 Gunakan data berikut:
+<p>Sincerely,<br>
+<strong>[Full Name]</strong></p>
 
-            - CV:
-            ${cvText}
+📎 Use the following data:
 
-            - Lowongan Kerja:
-            ${JSON.stringify(jobData, null, 2)}
+- CV:
+${cvText}
 
-            ⚠️ Penting
-            - Jangan tampilkan placeholder seperti [Nama Perusahaan] atau [Posisi yang dilamar] dalam hasil akhir.  
-            - Format keluaran wajib valid JSON seperti struktur di atas.
-            - Jangan gunakan tag HTML seperti <strong>, <em>, atau lainnya dalam bagian compatibility (strong_match, experience_level, minor_gap).`
+- Job Listing:
+${JSON.stringify(jobData, null, 2)}
+
+⚠️ Important
+- Do not include placeholders like [Company Name] or [Job Title] in the final output.
+- Output must be valid JSON as per the structure above.
+- Do not use HTML tags such as <strong>, <em>, etc., in the compatibility section (strong_match, experience_level, minor_gap).`
         }]
       }
     ],
