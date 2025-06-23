@@ -30,7 +30,7 @@ const [isPending, startTransition] = useTransition();
         setTimeout(() => {
           router.push("/dashboard/cover-letter");
           console.log("this delay");
-          // window.location.reload(); // opsional, jika masih bermasalah
+          window.location.reload(); // opsional, jika masih bermasalah
         }, 500);
         console.log("Login successful:", result);
       } else {
