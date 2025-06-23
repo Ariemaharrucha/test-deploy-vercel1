@@ -28,9 +28,10 @@ const [isPending, startTransition] = useTransition();
       if (result?.success) {
         toast.success("Login successful!");
         setTimeout(() => {
-          router.push("/dashboard/cover-letter");
+          // router.push("/dashboard/cover-letter");
           console.log("this delay");
-          window.location.reload(); // opsional, jika masih bermasalah
+          // window.location.reload(); 
+          window.location.replace("/dashboard/cover-letter");
         }, 500);
         console.log("Login successful:", result);
       } else {
