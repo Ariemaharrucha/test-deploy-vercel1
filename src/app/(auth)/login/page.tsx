@@ -27,7 +27,10 @@ const [isPending, startTransition] = useTransition();
 
       if (result?.success) {
         toast.success("Login successful!");
-        router.push("/dashboard/cover-letter");
+        setTimeout(() => {
+          router.push("/dashboard/cover-letter");
+          // window.location.reload(); // opsional, jika masih bermasalah
+        }, 500);
       } else {
         const msg = result?.error || "An error occurred during login";
         setError(msg);
