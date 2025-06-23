@@ -28,20 +28,6 @@ export default function CoverLetterPage() {
   const editorRef = useRef<HTMLDivElement>(null)
   const reactToPrintFn = useReactToPrint({ contentRef: editorRef });
 
-  const handleDownload = () => {
-    if (generatedCoverLetter?.coverLetter) {
-      const blob = new Blob([generatedCoverLetter.coverLetter], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "cover-letter.txt";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-  };
-
   return (
     <div className="space-y-6">
       <div>
@@ -80,7 +66,7 @@ export default function CoverLetterPage() {
                 <CardTitle className="text-navy-900">Cover Letter Preview</CardTitle>
                 <CardDescription>Your generated cover letter will appear here</CardDescription>
               </div>
-              { generatedCoverLetter && <Button onClick={handleDownload}>Download</Button>}
+              { generatedCoverLetter && <Button onClick={reactToPrintFn}>Download</Button>}
             </div>
             </CardHeader>
             <CardContent>
