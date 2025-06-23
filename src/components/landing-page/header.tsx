@@ -9,7 +9,7 @@ export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (
-      <header className="container mx-auto text-white relative">
+      <header className="sticky top-0 z-10 container mx-auto text-white bg-[#101010]">
         <div className="flex items-center justify-between px-4 sm:px-6 py-4">
           <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-2">

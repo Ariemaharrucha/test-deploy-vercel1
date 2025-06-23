@@ -3,7 +3,7 @@ import CTA from "./cta";
 
 export default function Footer() {
   return (
-    <section className="py-20  px-4 md:px-6">
+    <section className="py-8 px-4 md:px-6 md:py-20">
       <div className="max-w-7xl mx-auto">
         <div className="bg-[#fe7a42] rounded-2xl md:p-12 p-8 text-black relative overflow-hidden">
           <CTA />

@@ -20,7 +20,7 @@ export default function CTA() {
           Createcover letter with EasyLetter in minutes.
         </p>
         <div className="mt-6 space-x-4 space-y-4 md:space-y-0 ">
-          <Link href="/dashboard/cover-letter">
+          <Link className="block md:inline-block" href="/dashboard/cover-letter">
             <Button className="px-8 py-6 rounded-full font-medium text-md cursor-pointer">
                 Create Cover letter now
               <span>

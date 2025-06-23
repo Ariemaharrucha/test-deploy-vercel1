@@ -33,7 +33,7 @@ const [isPending, startTransition] = useTransition();
           // window.location.reload(); 
           window.location.replace("/dashboard/cover-letter");
         }, 500);
-        console.log("Login successful:", result);
+        // console.log("Login successful:", result);
       } else {
         const msg = result?.error || "An error occurred during login";
         setError(msg);
